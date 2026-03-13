@@ -2,12 +2,14 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { BUNDLES } from '../utils/bundleConfig'
+import { useAuth } from '../context/AuthContext'
 
 export default function Payment() {
     const [searchParams] = useSearchParams()
     const bundleKey = searchParams.get('bundle') || 'plus'
     const bundle = BUNDLES[bundleKey] || BUNDLES.plus
     const navigate = useNavigate()
+    const { updateUser } = useAuth()
 
     const [form, setForm] = useState({ cardHolder: '', cardNumber: '', expiry: '', cvv: '', agreed: false })
     const [error, setError] = useState('')
@@ -28,6 +30,7 @@ export default function Payment() {
         if (err) return setError(err)
 
         localStorage.setItem('eve_bundle', JSON.stringify(bundleKey))
+        updateUser({ bundle: bundleKey })
         setSuccess(true)
         setTimeout(() => {
             navigate('/')

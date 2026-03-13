@@ -15,21 +15,30 @@ import Medications from './pages/Medications'
 import Payment from './pages/Payment'
 import About from './pages/About'
 
+// ← NEW FILE imports
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
+import AuthGuard from './components/AuthGuard'
+import { AuthProvider } from './context/AuthContext'
+
 function AppInner({ setToast }) {
     const { medPopup, dismissMed, snoozeMed, apptPopup, dismissAppt } = usePopupReminder()
 
     return (
         <div className="min-h-screen bg-[#FFF5F8]" dir="rtl">
-            <Navbar />
+            <Navbar setToast={setToast} />
             <main className="pt-16 pb-20 md:pb-0">
                 <Routes>
-                    <Route path="/" element={<Home setToast={setToast} />} />
-                    <Route path="/doctors" element={<Doctors setToast={setToast} />} />
-                    <Route path="/health" element={<Health setToast={setToast} />} />
-                    <Route path="/womens-health" element={<WomensHealth setToast={setToast} />} />
-                    <Route path="/medications" element={<Medications setToast={setToast} />} />
-                    <Route path="/payment" element={<Payment setToast={setToast} />} />
+                    <Route path="/" element={<AuthGuard><Home setToast={setToast} /></AuthGuard>} />
+                    <Route path="/doctors" element={<AuthGuard><Doctors setToast={setToast} /></AuthGuard>} />
+                    <Route path="/health" element={<AuthGuard><Health setToast={setToast} /></AuthGuard>} />
+                    <Route path="/womens-health" element={<AuthGuard><WomensHealth setToast={setToast} /></AuthGuard>} />
+                    <Route path="/medications" element={<AuthGuard><Medications setToast={setToast} /></AuthGuard>} />
+                    <Route path="/payment" element={<AuthGuard><Payment setToast={setToast} /></AuthGuard>} />
+                    
                     <Route path="/about" element={<About />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
                 </Routes>
             </main>
 
@@ -44,8 +53,10 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <AppInner setToast={(msg, type) => setToast({ msg, type })} />
-            {toast && <Toast message={toast.msg} type={toast.type || 'success'} onClose={() => setToast(null)} />}
+            <AuthProvider>
+                <AppInner setToast={(msg, type) => setToast({ msg, type })} />
+                {toast && <Toast message={toast.msg} type={toast.type || 'success'} onClose={() => setToast(null)} />}
+            </AuthProvider>
         </BrowserRouter>
     )
 }

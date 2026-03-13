@@ -1,12 +1,12 @@
 // src/pages/Home.jsx
 import { useNavigate } from 'react-router-dom'
 import { Stethoscope, Pill, HeartPulse, Heart, ArrowLeft, Star } from 'lucide-react'
-import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useAuth } from '../context/AuthContext'
 import { BUNDLES, BUNDLE_ORDER } from '../utils/bundleConfig'
 
 export default function Home({ setToast }) {
     const navigate = useNavigate()
-    const [user] = useLocalStorage('eve_user', { name: 'ضيفة' })
+    const { isLoggedIn } = useAuth()
     const bundlesList = BUNDLE_ORDER.map(k => ({ id: k, ...BUNDLES[k] }))
 
     return (
@@ -43,24 +43,49 @@ export default function Home({ setToast }) {
                             احجزي طبيبتك، تتبعي صحتك، ولا تنسي دواءك — كل شيء في مكان واحد
                         </p>
                         <div className="flex gap-4">
-                            <button
-                                onClick={() => navigate('/payment')}
-                                className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
-                                style={{ background: 'white', color: '#C2185B' }}
-                                onMouseEnter={e => e.target.style.backgroundColor = '#FDE8EF'}
-                                onMouseLeave={e => e.target.style.backgroundColor = 'white'}
-                            >
-                                إنشاء حساب مجاني
-                            </button>
-                            <button
-                                onClick={() => navigate('/doctors')}
-                                className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
-                                style={{ border: '2px solid white', color: 'white', background: 'transparent' }}
-                                onMouseEnter={e => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#C2185B' }}
-                                onMouseLeave={e => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white' }}
-                            >
-                                تسجيل الدخول
-                            </button>
+                            {!isLoggedIn ? (
+                                <>
+                                    <button
+                                        onClick={() => navigate('/signup')}
+                                        className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
+                                        style={{ background: 'white', color: '#C2185B' }}
+                                        onMouseEnter={e => e.target.style.backgroundColor = '#FDE8EF'}
+                                        onMouseLeave={e => e.target.style.backgroundColor = 'white'}
+                                    >
+                                        إنشاء حساب مجاني
+                                    </button>
+                                    <button
+                                        onClick={() => navigate('/signin')}
+                                        className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
+                                        style={{ border: '2px solid white', color: 'white', background: 'transparent' }}
+                                        onMouseEnter={e => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#C2185B' }}
+                                        onMouseLeave={e => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white' }}
+                                    >
+                                        تسجيل الدخول
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <button
+                                        onClick={() => navigate('/health')}
+                                        className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
+                                        style={{ background: 'white', color: '#C2185B' }}
+                                        onMouseEnter={e => e.target.style.backgroundColor = '#FDE8EF'}
+                                        onMouseLeave={e => e.target.style.backgroundColor = 'white'}
+                                    >
+                                        سجّلي صحتك اليوم
+                                    </button>
+                                    <button
+                                        onClick={() => navigate('/doctors')}
+                                        className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition"
+                                        style={{ border: '2px solid white', color: 'white', background: 'transparent' }}
+                                        onMouseEnter={e => { e.target.style.backgroundColor = 'white'; e.target.style.color = '#C2185B' }}
+                                        onMouseLeave={e => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = 'white' }}
+                                    >
+                                        ابحثي عن طبيبة
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="hidden md:flex justify-end">

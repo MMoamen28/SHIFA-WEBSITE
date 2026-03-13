@@ -1,9 +1,11 @@
 // src/hooks/useBundle.js
-import { useLocalStorage } from './useLocalStorage'
+import { useAuth } from '../context/AuthContext'
 import { hasAccess } from '../utils/bundleConfig'
 
 export const useBundle = () => {
-    const [bundle] = useLocalStorage('eve_bundle', 'essential')
+    const { currentUser } = useAuth()
+    const storedBundle = JSON.parse(localStorage.getItem('eve_bundle') || '"essential"')
+    const bundle = currentUser?.bundle || storedBundle
     return {
         bundle,
         canAccess: (required) => hasAccess(bundle, required),
