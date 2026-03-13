@@ -123,7 +123,7 @@ export default function SignUp() {
                 }}></div>
                 
                 <div className="relative z-10 text-center flex flex-col items-center max-w-md px-8 text-white">
-                    <img src="/logo.png" alt="EVE" className="mb-4" style={{ height: '140px', filter: 'brightness(0) invert(1)' }} />
+                    <img src="/logo.png" alt="EVE" className="mb-4" style={{ height: '140px', objectFit: 'contain', borderRadius: '16px' }} />
                     <p className="text-lg italic tracking-wider mb-10 opacity-90" style={{ fontFamily: 'serif' }}>
                         · Her life. Her care ·
                     </p>

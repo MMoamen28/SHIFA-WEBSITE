@@ -33,7 +33,8 @@ export default function Home({ setToast }) {
                                 width: 'auto',
                                 margin: '0 auto 24px',
                                 display: 'block',
-                                filter: 'brightness(0) invert(1)'
+                                borderRadius: '16px',
+                                objectFit: 'contain'
                             }}
                         />
                         <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
@@ -215,7 +216,7 @@ export default function Home({ setToast }) {
                 <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12">
                     <div className="col-span-1 md:col-span-2">
                         <div className="font-bold text-2xl mb-4" style={{ color: '#C2185B' }}>
-                            <img src="/logo.png" alt="EVE" style={{ height: '40px', display: 'inline-block', marginLeft: '8px', filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(310deg)' }} />
+                            <img src="/logo.png" alt="EVE" style={{ height: '40px', display: 'inline-block', marginLeft: '8px', objectFit: 'contain', borderRadius: '8px' }} />
                         </div>
                         <p className="mb-6 max-w-sm">
                             منصة صحة المرأة الرقمية الأولى المتكاملة. نهدف إلى تمكين المرأة من إدارة صحتها وتقديم تجربة رعاية شاملة.
