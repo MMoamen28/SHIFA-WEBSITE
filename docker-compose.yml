@@ -1,0 +1,36 @@
+# docker-compose.yml
+# DEVELOPMENT (hot reload at http://localhost:5173):
+# docker-compose up dev
+# PRODUCTION BUILD (served at http://localhost:8080):
+# docker-compose up prod --build
+# REBUILD FROM SCRATCH:
+# docker-compose down && docker-compose up --build
+# VIEW LOGS:
+# docker-compose logs -f dev
+# ENTER CONTAINER FOR DEBUGGING:
+# docker exec -it shifa-dev sh
+
+version: '3.8'
+services:
+  dev:
+    build:
+      context: .
+      target: builder
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    container_name: shifa-dev
+
+  prod:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - dev
+    container_name: shifa-prod
