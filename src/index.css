@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: #F8FAFC;
+  background-color: #FFF5F8;
   color: #1E293B;
   line-height: 1.8;
 }
@@ -19,8 +19,8 @@ html { scroll-behavior: smooth; }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #F1F5F9; }
-::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+::-webkit-scrollbar-track { background: #FDE8EF; }
+::-webkit-scrollbar-thumb { background: #C2185B; border-radius: 3px; }
 
 /* Range slider RTL fix */
 input[type="range"] { direction: ltr; }
@@ -61,4 +61,17 @@ input[type="range"] { direction: ltr; }
 .check-draw {
   stroke-dasharray: 100;
   animation: checkDraw 0.6s ease forwards 0.2s;
+}
+
+/* Premium card hover effect */
+.eve-card {
+  background: #FFFFFF;
+  border: 1px solid #F9D0DF;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(194, 24, 91, 0.08);
+  transition: all 0.3s ease;
+}
+.eve-card:hover {
+  box-shadow: 0 8px 32px rgba(194, 24, 91, 0.15);
+  transform: translateY(-2px);
 }

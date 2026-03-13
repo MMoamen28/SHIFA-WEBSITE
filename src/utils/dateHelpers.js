@@ -50,5 +50,5 @@ export const MILESTONES = {
 export const getMilestone = (week) => {
     const keys = Object.keys(MILESTONES).map(Number).sort((a, b) => a - b)
     const key = keys.reverse().find(k => week >= k)
-    return key ? MILESTONES[key] : 'تابعي رحلتك مع شفا 💚'
+    return key ? MILESTONES[key] : 'تابعي رحلتك مع EVE 💗'
 }

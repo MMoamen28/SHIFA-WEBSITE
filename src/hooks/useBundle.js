@@ -3,7 +3,7 @@ import { useLocalStorage } from './useLocalStorage'
 import { hasAccess } from '../utils/bundleConfig'
 
 export const useBundle = () => {
-    const [bundle] = useLocalStorage('shifa_bundle', 'essential')
+    const [bundle] = useLocalStorage('eve_bundle', 'essential')
     return {
         bundle,
         canAccess: (required) => hasAccess(bundle, required),

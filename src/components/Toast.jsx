@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 const COLORS = {
     success: 'bg-green-500',
     error: 'bg-red-500',
-    info: 'bg-teal-600',
+    info: 'bg-[#C2185B]',
 }
 
 export default function Toast({ message, type = 'success', onClose }) {

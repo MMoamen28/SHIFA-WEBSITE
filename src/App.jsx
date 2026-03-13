@@ -13,12 +13,13 @@ import Health from './pages/Health'
 import WomensHealth from './pages/WomensHealth'
 import Medications from './pages/Medications'
 import Payment from './pages/Payment'
+import About from './pages/About'
 
 function AppInner({ setToast }) {
     const { medPopup, dismissMed, snoozeMed, apptPopup, dismissAppt } = usePopupReminder()
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC]" dir="rtl">
+        <div className="min-h-screen bg-[#FFF5F8]" dir="rtl">
             <Navbar />
             <main className="pt-16 pb-20 md:pb-0">
                 <Routes>
@@ -28,6 +29,7 @@ function AppInner({ setToast }) {
                     <Route path="/womens-health" element={<WomensHealth setToast={setToast} />} />
                     <Route path="/medications" element={<Medications setToast={setToast} />} />
                     <Route path="/payment" element={<Payment setToast={setToast} />} />
+                    <Route path="/about" element={<About />} />
                 </Routes>
             </main>
 

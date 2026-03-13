@@ -21,8 +21,11 @@ export default function BundleGuard({ required, children, inline = false }) {
                     </p>
                     <button
                         onClick={() => navigate(`/payment?bundle=${required}`)}
-                        className="bg-teal-600 text-white px-5 py-2 rounded-full 
-                       text-sm font-bold hover:bg-teal-700 transition"
+                        className="text-white px-5 py-2 rounded-full 
+                       text-sm font-bold transition"
+                        style={{ backgroundColor: '#C2185B' }}
+                        onMouseEnter={e => e.target.style.backgroundColor = '#8B1245'}
+                        onMouseLeave={e => e.target.style.backgroundColor = '#C2185B'}
                     >
                         ترقّي الآن
                     </button>
@@ -33,7 +36,7 @@ export default function BundleGuard({ required, children, inline = false }) {
 
     return (
         <div className="min-h-[60vh] flex items-center justify-center">
-            <div className="text-center bg-white rounded-2xl shadow-lg p-10 max-w-md">
+            <div className="text-center bg-white rounded-2xl shadow-lg p-10 max-w-md" style={{ border: '1px solid #F9D0DF' }}>
                 <div className="text-6xl mb-4">🔒</div>
                 <h2 className="text-xl font-bold text-gray-800 mb-2">
                     هذه الميزة متاحة مع باقة بلس فما فوق
@@ -41,8 +44,11 @@ export default function BundleGuard({ required, children, inline = false }) {
                 <p className="text-gray-500 mb-6">تبدأ من 49 ج.م/شهر فقط</p>
                 <button
                     onClick={() => navigate(`/payment?bundle=${required}`)}
-                    className="bg-teal-600 text-white px-8 py-3 rounded-full 
-                     font-bold text-lg hover:bg-teal-700 transition"
+                    className="text-white px-8 py-3 rounded-full 
+                     font-bold text-lg transition"
+                    style={{ backgroundColor: '#C2185B' }}
+                    onMouseEnter={e => e.target.style.backgroundColor = '#8B1245'}
+                    onMouseLeave={e => e.target.style.backgroundColor = '#C2185B'}
                 >
                     ترقّي الآن 🚀
                 </button>

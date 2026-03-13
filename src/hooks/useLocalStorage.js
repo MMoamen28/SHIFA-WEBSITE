@@ -13,7 +13,7 @@ export const useLocalStorage = (key, initialValue) => {
         try {
             localStorage.setItem(key, JSON.stringify(value))
             if (process.env.NODE_ENV === 'development') {
-                console.log(`[shifa] ${key} updated:`, value)
+                console.log(`[eve] ${key} updated:`, value)
             }
         }
         catch (e) { console.error('localStorage error:', e) }

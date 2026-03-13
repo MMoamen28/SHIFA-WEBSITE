@@ -19,9 +19,9 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4">
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden popup-enter">
-                <div className="p-5 border-b border-slate-100 flex justify-between items-center">
-                    <h2 className="font-bold text-xl text-slate-800">تأكيد الحجز</h2>
+            <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden popup-enter" style={{ border: '1px solid #F9D0DF' }}>
+                <div className="p-5 border-b flex justify-between items-center" style={{ borderColor: '#F9D0DF' }}>
+                    <h2 className="font-bold text-xl" style={{ color: '#6B1535' }}>تأكيد الحجز</h2>
                     <button onClick={onClose} className="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
                 </div>
 
@@ -34,7 +34,7 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
                             {doctor.initials}
                         </div>
                         <div>
-                            <p className="font-bold text-slate-800">د. {doctor.name}</p>
+                            <p className="font-bold" style={{ color: '#6B1535' }}>د. {doctor.name}</p>
                             <p className="text-slate-500 text-sm">{doctor.specialty}</p>
                         </div>
                     </div>
@@ -45,7 +45,8 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
                             <input
                                 type="date"
                                 required
-                                className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                                className="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-1"
+                                style={{ borderColor: '#F9D0DF', '--tw-ring-color': '#C2185B' }}
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
                             />
@@ -55,7 +56,8 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
                             <input
                                 type="time"
                                 required
-                                className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                                className="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-1"
+                                style={{ borderColor: '#F9D0DF', '--tw-ring-color': '#C2185B' }}
                                 value={time}
                                 onChange={(e) => setTime(e.target.value)}
                             />
@@ -64,7 +66,10 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
                         <div className="pt-4">
                             <button
                                 type="submit"
-                                className="w-full bg-teal-600 text-white font-bold py-3 rounded-xl hover:bg-teal-700 transition"
+                                className="w-full text-white font-bold py-3 rounded-xl transition"
+                                style={{ backgroundColor: '#C2185B' }}
+                                onMouseEnter={e => e.target.style.backgroundColor = '#8B1245'}
+                                onMouseLeave={e => e.target.style.backgroundColor = '#C2185B'}
                             >
                                 تأكيد الحجز ({doctor.price} ج.م)
                             </button>

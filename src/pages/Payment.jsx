@@ -14,7 +14,7 @@ export default function Payment() {
     const [success, setSuccess] = useState(false)
 
     const validate = () => {
-        if (!form.cardHolder.trim()) return 'الرجاء إدخال اسم حامل البطاقة'
+        if (!form.cardHolder.trim()) return 'الرجاء إدخال اسم حاملة البطاقة'
         if (form.cardNumber.replace(/\s/g, '').length !== 16) return 'رقم البطاقة يجب أن يكون 16 رقماً'
         if (form.expiry.length !== 5 || !form.expiry.includes('/')) return 'تاريخ انتهاء غير صحيح'
         if (form.cvv.length !== 3) return 'رمز CVV يجب أن يكون 3 أرقام'
@@ -27,7 +27,7 @@ export default function Payment() {
         const err = validate()
         if (err) return setError(err)
 
-        localStorage.setItem('shifa_bundle', JSON.stringify(bundleKey))
+        localStorage.setItem('eve_bundle', JSON.stringify(bundleKey))
         setSuccess(true)
         setTimeout(() => {
             navigate('/')
@@ -49,13 +49,14 @@ export default function Payment() {
 
     if (success) {
         return (
-            <div className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center">
-                <svg className="w-32 h-32 text-emerald-500 mb-6" viewBox="0 0 52 52">
-                    <circle className="text-emerald-100 fill-current" cx="26" cy="26" r="25" />
-                    <path className="check-draw fill-none stroke-emerald-500 stroke-[4] stroke-linecap-round" d="M14 27l7 7 16-16" />
+            <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center" style={{ backgroundColor: '#FFF5F8' }}>
+                <img src="/logo.png" alt="EVE" style={{ height: '60px', margin: '0 auto 16px' }} />
+                <svg className="w-32 h-32 mb-6" viewBox="0 0 52 52">
+                    <circle style={{ fill: '#FDE8EF' }} cx="26" cy="26" r="25" />
+                    <path className="check-draw" style={{ fill: 'none', stroke: '#C2185B', strokeWidth: 4, strokeLinecap: 'round' }} d="M14 27l7 7 16-16" />
                 </svg>
-                <h2 className="text-3xl font-bold text-slate-800 mb-2">تم الاشتراك بنجاح!</h2>
-                <p className="text-slate-500 text-lg">مرحباً بك في باقة {bundle.nameAr}</p>
+                <h2 className="text-3xl font-bold mb-2" style={{ color: '#6B1535' }}>تم الاشتراك بنجاح!</h2>
+                <p className="text-lg" style={{ color: '#C2185B' }}>مرحباً بكِ في باقة {bundle.nameAr}</p>
             </div>
         )
     }
@@ -63,44 +64,44 @@ export default function Payment() {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
             <div className="text-center mb-10">
-                <h1 className="text-3xl font-bold text-slate-800 mb-3">إتمام الدفع</h1>
-                <p className="text-slate-500 text-lg">الترقية إلى باقة {bundle.nameAr} - {bundle.price}</p>
+                <h1 className="text-3xl font-bold mb-3" style={{ color: '#6B1535' }}>إتمام الدفع</h1>
+                <p className="text-lg" style={{ color: '#C2185B' }}>الترقية إلى باقة {bundle.nameAr} - {bundle.price}</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 items-start">
                 {/* Order Summary */}
-                <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 order-2 md:order-1">
-                    <h2 className="text-xl font-bold text-slate-800 mb-6 border-b pb-4">ملخص الطلب</h2>
+                <div className="bg-white rounded-3xl p-8 shadow-sm order-2 md:order-1 eve-card">
+                    <h2 className="text-xl font-bold mb-6 pb-4" style={{ color: '#6B1535', borderBottom: '1px solid #F9D0DF' }}>ملخص الطلب</h2>
 
                     <div className="flex justify-between items-center mb-6">
                         <div className="flex items-center gap-3">
                             <span className="text-2xl">{bundle.emoji}</span>
                             <div>
-                                <p className="font-bold text-slate-800">باقة {bundle.nameAr}</p>
+                                <p className="font-bold" style={{ color: '#6B1535' }}>باقة {bundle.nameAr}</p>
                                 <p className="text-sm text-slate-500">اشتراك شهري</p>
                             </div>
                         </div>
-                        <p className="font-bold text-xl text-slate-800">{bundle.priceNum} ج.م</p>
+                        <p className="font-bold text-xl" style={{ color: '#6B1535' }}>{bundle.priceNum} ج.م</p>
                     </div>
 
                     <div className="space-y-3 mb-8">
                         {bundle.features.map((f, i) => (
                             <div key={i} className="flex gap-3 items-center">
-                                <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">✓</div>
+                                <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#FDE8EF', color: '#C2185B' }}>✓</div>
                                 <span className="text-slate-600">{f}</span>
                             </div>
                         ))}
                     </div>
 
-                    <div className="border-t pt-4 flex justify-between items-center bg-slate-50 p-4 rounded-xl">
+                    <div className="border-t pt-4 flex justify-between items-center p-4 rounded-xl" style={{ borderColor: '#F9D0DF', backgroundColor: '#FFF5F8' }}>
                         <span className="font-bold text-slate-700">الإجمالي الدفع:</span>
-                        <span className="font-bold text-2xl text-teal-600">{bundle.priceNum} ج.م</span>
+                        <span className="font-bold text-2xl" style={{ color: '#C2185B' }}>{bundle.priceNum} ج.م</span>
                     </div>
                 </div>
 
                 {/* Payment Form */}
-                <div className="bg-white rounded-3xl p-8 shadow-lg border border-teal-100 order-1 md:order-2">
-                    <h2 className="text-xl font-bold text-slate-800 mb-6">بطاقة الدفع</h2>
+                <div className="bg-white rounded-3xl p-8 shadow-lg order-1 md:order-2 eve-card">
+                    <h2 className="text-xl font-bold mb-6" style={{ color: '#6B1535' }}>بطاقة الدفع</h2>
 
                     {error && (
                         <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 font-semibold flex items-center gap-2">
@@ -110,10 +111,11 @@ export default function Payment() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">اسم حامل البطاقة</label>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">اسم حاملة البطاقة</label>
                             <input
                                 type="text"
-                                className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                                className="w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-1"
+                                style={{ border: '1px solid #F9D0DF', '--tw-ring-color': '#C2185B' }}
                                 placeholder="الاسم كما هو مطبوع على البطاقة"
                                 value={form.cardHolder}
                                 onChange={e => setForm({ ...form, cardHolder: e.target.value })}
@@ -125,7 +127,8 @@ export default function Payment() {
                             <input
                                 type="text"
                                 dir="ltr"
-                                className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-left font-mono"
+                                className="w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-1 text-left font-mono"
+                                style={{ border: '1px solid #F9D0DF', '--tw-ring-color': '#C2185B' }}
                                 placeholder="0000 0000 0000 0000"
                                 value={form.cardNumber}
                                 onChange={handleCardNumber}
@@ -139,7 +142,8 @@ export default function Payment() {
                                 <input
                                     type="text"
                                     dir="ltr"
-                                    className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-center font-mono"
+                                    className="w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-1 text-center font-mono"
+                                    style={{ border: '1px solid #F9D0DF', '--tw-ring-color': '#C2185B' }}
                                     placeholder="MM/YY"
                                     value={form.expiry}
                                     onChange={handleExpiry}
@@ -151,7 +155,8 @@ export default function Payment() {
                                 <input
                                     type="password"
                                     dir="ltr"
-                                    className="w-full border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-center font-mono tracking-widest"
+                                    className="w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-1 text-center font-mono tracking-widest"
+                                    style={{ border: '1px solid #F9D0DF', '--tw-ring-color': '#C2185B' }}
                                     placeholder="•••"
                                     value={form.cvv}
                                     onChange={e => {
@@ -167,7 +172,8 @@ export default function Payment() {
                             <label className="flex items-center gap-3 cursor-pointer">
                                 <input
                                     type="checkbox"
-                                    className="w-5 h-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500"
+                                    className="w-5 h-5 rounded"
+                                    style={{ accentColor: '#C2185B' }}
                                     checked={form.agreed}
                                     onChange={e => setForm({ ...form, agreed: e.target.checked })}
                                 />
@@ -177,9 +183,12 @@ export default function Payment() {
 
                         <button
                             type="submit"
-                            className="w-full bg-teal-600 text-white font-bold py-4 rounded-xl hover:bg-teal-700 transition text-lg shadow-md hover:shadow-lg"
+                            className="w-full text-white font-bold py-4 rounded-xl transition text-lg shadow-md hover:shadow-lg"
+                            style={{ backgroundColor: '#C2185B' }}
+                            onMouseEnter={e => e.target.style.backgroundColor = '#8B1245'}
+                            onMouseLeave={e => e.target.style.backgroundColor = '#C2185B'}
                         >
-                            ادفع {bundle.priceNum} ج.م
+                            ادفعي {bundle.priceNum} ج.م
                         </button>
                         <div className="flex justify-center gap-4 pt-4 opacity-50">
                             <span className="text-xl font-bold italic">VISA</span>

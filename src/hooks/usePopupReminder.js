@@ -12,7 +12,7 @@ export const usePopupReminder = () => {
             const nowMs = Date.now()
 
             // Medicine reminders
-            const meds = JSON.parse(localStorage.getItem('shifa_meds') || '[]')
+            const meds = JSON.parse(localStorage.getItem('eve_meds') || '[]')
             for (const med of meds) {
                 if (med.times?.includes(now)) {
                     setMedPopup({ name: med.name, time: now, id: med.id })
@@ -21,7 +21,7 @@ export const usePopupReminder = () => {
             }
 
             // Appointment reminders (60 min before)
-            const appts = JSON.parse(localStorage.getItem('shifa_appts') || '[]')
+            const appts = JSON.parse(localStorage.getItem('eve_appts') || '[]')
             for (const appt of appts) {
                 const apptMs = new Date(appt.dateTime).getTime()
                 const diffMin = (apptMs - nowMs) / 60000
